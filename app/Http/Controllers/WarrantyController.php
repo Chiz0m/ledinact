@@ -73,7 +73,6 @@ class WarrantyController extends Controller
         //
         $request->validate([
             'serial_number' => 'required',
-            'name' => 'required',
             'description' => 'required',
         ]);
 
