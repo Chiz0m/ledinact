@@ -75,7 +75,7 @@ class SerialNumberController extends Controller
 
             $message = 'Serial Number Is Activated';
         } else {
-            $message = 'Cannot be activated. Contact info@ledinaction.com';
+            $message = 'This serial number cannot be activated. Contact info@ledinaction.com';
         }
 
 
