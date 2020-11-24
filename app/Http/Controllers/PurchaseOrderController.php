@@ -39,14 +39,6 @@ class PurchaseOrderController extends Controller
         ]);
 
         $purchase_order = PurchaseOrder::create($request->all());
-        // the message
-        $msg = "New mail from webapp \nPlease check mail";
-
-        // use wordwrap() if lines are longer than 70 characters
-        $msg = wordwrap($msg, 70);
-
-        // send email
-        mail("chizomreal@gmail.com", "Testing mail", $msg);
         return new PurchaseOrderResource([$purchase_order, 'message' => 'Purchase Order Has Been Added']);
     }
 

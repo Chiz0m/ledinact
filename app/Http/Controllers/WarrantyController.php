@@ -78,6 +78,16 @@ class WarrantyController extends Controller
 
         $warranty = Warranty::create($request->all());
 
+        // the message
+        $msg = "A warranty claim has been added \nPlease check the webapp for more info!";
+
+        // use wordwrap() if lines are longer than 70 characters
+        $msg = wordwrap($msg, 70);
+
+        // send email
+        mail("kevin@ledinaction.com", "Warranty cliam notice", $msg);
+        mail("chizomreal@gmail.com", "Warranty cliam notice", $msg);
+
         return new WarrantyResource($warranty);
     }
 
