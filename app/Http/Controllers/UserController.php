@@ -69,6 +69,7 @@ class UserController extends Controller
         //     'password' => bcrypt($request->password),
         //     'user_type' => 1
         // ]);
+        dd($request->code);
         $user = User::findOrFail($request->code)->update(['password' => bcrypt($request->password)]);
 
         // $token = $user->createToken('TutsForWeb')->accessToken;
