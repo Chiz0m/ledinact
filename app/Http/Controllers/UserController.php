@@ -69,7 +69,7 @@ class UserController extends Controller
         //     'password' => bcrypt($request->password),
         //     'user_type' => 1
         // ]);
-        $user = User::where('geo_location', $request->code)->findOrFail()->update(['password' => bcrypt($request->password)]);
+        $user = User::where('geo_location', $request->code)->findOrFail($request->code)->update(['password' => bcrypt($request->password)]);
 
         // $token = $user->createToken('TutsForWeb')->accessToken;
 
