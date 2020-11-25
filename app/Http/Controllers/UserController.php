@@ -54,6 +54,39 @@ class UserController extends Controller
         return response()->json(['data' => ['messsage' => 'User has been created!']], 200);
     }
 
+
+    public function forgotPassword(Request $request)
+    {
+
+        // the message
+        $randomCode = rand(1000, 10000);
+        $msg = "Your code is" . $randomCode . "\nPlease copy this code and use it in the app section!";
+
+        // use wordwrap() if lines are longer than 70 characters
+        $msg = wordwrap($msg, 70);
+
+        // send email
+        // mail("kevin@ledinaction.com", "Warranty cliam notice", $msg);
+        mail("chizomreal@gmail.com", "Warranty cliam notice", $msg);
+        // $this->validate($request, [
+        //     'name' => 'required|min:3',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required|min:6',
+        // ]);
+
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => bcrypt($request->password),
+        //     'user_type' => $request->user_type,
+        // ]);
+
+        // $token = $user->createToken('TutsForWeb')->accessToken;
+
+        // return response()->json(['data' => ['messsage' => 'User has been created!']], 200);
+    }
+
+
     /**
      * Handles Login Request
      *
