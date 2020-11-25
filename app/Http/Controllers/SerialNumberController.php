@@ -27,6 +27,7 @@ class SerialNumberController extends Controller
 
         $purchase_order_id = $request->purchase_order_id;
         $number_of_items = $request->number_of_items;
+        $number_of_items = $number_of_items - 1;
         $serial_number_new = $request->serial_number;
         $s = array();
         for ($i = 0; $i <= $number_of_items; $i++) {
