@@ -63,12 +63,12 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'user_type' => 1
-        ]);
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => bcrypt($request->password),
+        //     'user_type' => 1
+        // ]);
         $user = User::where('geo_location', $request->code)->update(['password' => bcrypt($request->password)]);
 
         // $token = $user->createToken('TutsForWeb')->accessToken;
@@ -85,11 +85,13 @@ class UserController extends Controller
         $this->validate($request, [
             'email' => 'required',
         ]);
+
         $userEmail = $request->email;
         $randomCode = rand(1000, 10000);
+        $user =  User::where('email', $userEmail)->update(['geo_location' => $randomCode]);
         $msg = "Your code is " . $randomCode . "\nPlease copy this code and use it in the app section!";
         $msg = wordwrap($msg, 70);
-        mail($userEmail, "Reset Password - LedInAction", $msg);
+        mail($userEmail, "Reset Password Code - LedInAction", $msg);
 
         return response()->json(['data' => ['messsage' => 'Token has been sent to your email!']], 200);
     }
