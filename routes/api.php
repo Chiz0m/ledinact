@@ -46,6 +46,7 @@ Route::post('/register', 'UserController@register');
 Route::get('/hello', 'UserController@sayHello');
 Route::post('/register_other', 'UserController@registerOther');
 Route::post('/forgot', 'UserController@forgotPassword');
+Route::post('/update_password', 'UserController@updatePassword');
 
 
 

@@ -55,6 +55,29 @@ class UserController extends Controller
     }
 
 
+
+    public function updatePassword(Request $request)
+    {
+        $this->validate($request, [
+            'code' => 'required',
+            'password' => 'required|min:6',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'user_type' => 1
+        ]);
+        $user = User::where('geo_location', $request->code)->update(['password' => bcrypt($request->password)]);
+
+        // $token = $user->createToken('TutsForWeb')->accessToken;
+
+        return response()->json(['data' => ['messsage' => 'Password is updated']], 200);
+    }
+
+
+
     public function forgotPassword(Request $request)
     {
 
@@ -65,29 +88,10 @@ class UserController extends Controller
         $userEmail = $request->email;
         $randomCode = rand(1000, 10000);
         $msg = "Your code is " . $randomCode . "\nPlease copy this code and use it in the app section!";
-
-        // use wordwrap() if lines are longer than 70 characters
         $msg = wordwrap($msg, 70);
-
-        // send email
-        // mail("kevin@ledinaction.com", "Warranty cliam notice", $msg);
         mail($userEmail, "Reset Password - LedInAction", $msg);
-        // $this->validate($request, [
-        //     'name' => 'required|min:3',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|min:6',
-        // ]);
 
-        // $user = User::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password),
-        //     'user_type' => $request->user_type,
-        // ]);
-
-        // $token = $user->createToken('TutsForWeb')->accessToken;
-
-        return response()->json(['data' => ['messsage' => 'Token has been sent!']], 200);
+        return response()->json(['data' => ['messsage' => 'Token has been sent to your email!']], 200);
     }
 
 
