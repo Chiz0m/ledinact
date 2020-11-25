@@ -29,11 +29,11 @@ class SerialNumberController extends Controller
         $number_of_items = $request->number_of_items;
         $serial_number_new = $request->serial_number;
         $s = array();
-        for ($i = 1; $i <= $number_of_items; $i++) {
+        for ($i = 0; $i <= $number_of_items; $i++) {
 
-            $s[$i] = $serial_number_new . $i;
+            $s[$i] = $serial_number_new + $i;
             $request->merge([
-                'serial_number' => $serial_number_new . $i,
+                'serial_number' => $serial_number_new + $i,
             ]);
             $serial_number = SerialNumber::create($request->all());
         };
