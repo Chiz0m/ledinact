@@ -87,7 +87,7 @@ class UserController extends Controller
 
         // $token = $user->createToken('TutsForWeb')->accessToken;
 
-        // return response()->json(['data' => ['messsage' => 'User has been created!']], 200);
+        return response()->json(['data' => ['messsage' => 'Token has been sent!']], 200);
     }
 
 
