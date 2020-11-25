@@ -59,15 +59,19 @@ class UserController extends Controller
     {
 
         // the message
+        $this->validate($request, [
+            'email' => 'required',
+        ]);
+        $userEmail = $request->email;
         $randomCode = rand(1000, 10000);
-        $msg = "Your code is" . $randomCode . "\nPlease copy this code and use it in the app section!";
+        $msg = "Your code is " . $randomCode . "\nPlease copy this code and use it in the app section!";
 
         // use wordwrap() if lines are longer than 70 characters
         $msg = wordwrap($msg, 70);
 
         // send email
         // mail("kevin@ledinaction.com", "Warranty cliam notice", $msg);
-        mail("chizomreal@gmail.com", "Warranty cliam notice", $msg);
+        mail($userEmail, "Reset Password - LedInAction", $msg);
         // $this->validate($request, [
         //     'name' => 'required|min:3',
         //     'email' => 'required|email|unique:users',
