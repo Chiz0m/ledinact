@@ -32,9 +32,9 @@ class SerialNumberController extends Controller
         $s = array();
         for ($i = 0; $i <= $number_of_items; $i++) {
 
-            $s[$i] = $serial_number_new + $i;
+            $s[$i] = $serial_number_new .''. $i;
             $request->merge([
-                'serial_number' => $serial_number_new + $i,
+                'serial_number' => $serial_number_new .''. $i,
             ]);
             $serial_number = SerialNumber::create($request->all());
         };
@@ -56,6 +56,22 @@ class SerialNumberController extends Controller
         $serial_number->deleted = \Carbon\Carbon::now();
         $serial_number->save();
         return response()->json(['data' => ['message' => 'Deleted', 'id' => $purchase_order_id]]);
+    }
+
+    //list of deleted serial numbers
+    public function deleted(): SerialNumberResource
+    {
+        $serial_number = SerialNumber::whereNotNull('deleted')->get();
+        return new SerialNumberResource($serial_number);
+    }
+
+    public function restore($id)
+    {
+        $serial_number = SerialNumber::findOrFail($id);
+        $purchase_order_id = $serial_number->purchase_order_id;
+        $serial_number->deleted = NULL;
+        $serial_number->save();
+        return response()->json(['data' => ['message' => 'Restored', 'id' => $purchase_order_id]]);
     }
 
 

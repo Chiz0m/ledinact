@@ -29,6 +29,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/serial-number/activate/{serial}', 'SerialNumberController@activate');
     Route::post('/serial-number/add', 'SerialNumberController@store');
     Route::get('/serial-number/delete/{id}', 'SerialNumberController@delete');
+    Route::get('/serial-number/restore/{id}', 'SerialNumberController@restore');
+    Route::get('/serial-number/deleted/', 'SerialNumberController@deleted');
     Route::get('/serial-number', 'SerialNumberController@index');
     Route::get('/serial-number/purchase-order/{purchase_order_number}', 'SerialNumberController@showForPurchaseOrder');
     Route::get('warranty/', 'WarrantyController@index');
