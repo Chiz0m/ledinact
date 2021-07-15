@@ -12,7 +12,7 @@ class SerialNumberController extends Controller
     //list serial number
     public function index(): SerialNumberResource
     {
-        $serial_number = SerialNumber::where('deleted', null)->paginate();
+        $serial_number = SerialNumber::where('deleted', null)->get();
         return new SerialNumberResource($serial_number);
     }
 

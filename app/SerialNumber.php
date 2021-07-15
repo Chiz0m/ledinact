@@ -9,7 +9,8 @@ class SerialNumber extends Model
     //
     protected $fillable = [
         'purchase_order_id',
-        'serial_number'
+        'serial_number',
+        
     ];
 
     public function getCreatedAtAttribute($value)

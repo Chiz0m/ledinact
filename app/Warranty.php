@@ -12,6 +12,8 @@ class Warranty extends Model
         'serial_number',
         'name',
         'location',
+        'longitude',
+        'latitude',
         'description',
         'status',
     ];
